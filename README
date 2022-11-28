@@ -1,0 +1,31 @@
+Hey Guys, to set up this backend database connection working locally, here's what you have to do.
+Software's needed:
+- Docker
+- IntelliJ
+- A HTTP Request Software (I am using Postman, can also use Telend Chrome Extention)
+
+1: Open up my project - preferably using IntelliJ Ultimate, wasn't working with community for some reason
+2: Go to the docker-compose.yaml file in my project and run the whole container (the double play button)
+3: Then go to my DoggyHotelApplication file within src/main/java/com.example and inset the following code within the CommandLineRunner class like this;
+        return args -> {
+        Dog dog = new Dog("12345678", "Emily", "0838674899", "emilygavin@hotmail.com", "Percy", Gender.MALE, "Red Setter", 7);
+        repository.insert(dog);
+        };
+4: Then go to localHost:8081 and this should open the MongoDB Interface. Here you need to create a new database called "doggyHotel"
+5: Re-run the DoggyHotelApplication class.
+6: Now on the MongoDB interface you should have the doggyHotel database and when you click on that, within that should be the dog container containing the new instance created in the CommandLineRunner.
+7: You can now remove the new Dog() from the DoggyHotelApplication and leave the return args -> {}; empty.
+8: The database should now be functioning. To work the database go to your HTTP Request Software.
+   -> Use the following GET method to see what's in the database: localhost:8080/api/v1/dogs
+   -> Use the following POST method to see what's in the database: localhost:8080/api/v1/dogs with the following body:
+
+   Needs to configured to be a RAW and a JSON
+   {
+           "ownerName": "Owners Name",
+           "phoneNumber": "08452364",
+           "emailAddress": "Ownersemail@hotmail.com",
+           "dogName": "Daisy",
+           "dogGender": "FEMALE",
+           "breed": "Red Setter",
+           "age": 7
+   }
