@@ -1,0 +1,24 @@
+image: maven:latest
+
+stages:
+    - build
+    - test
+
+build_job:
+  stage: build
+  tags:
+    - docker 
+
+  script: 
+    - echo "Maven compile started"
+    - "mvn compile"
+
+
+test_job:
+  stage: test
+  tags:
+    - docker 
+
+  script: 
+    - echo "Maven test started"
+    - "mvn test"
