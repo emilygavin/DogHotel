@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/dogs")
+@RequestMapping("/dogs")
 @AllArgsConstructor
 public class DogController {
 
@@ -18,9 +18,19 @@ public class DogController {
         return dogService.getAllDogs();
     }
 
-    @PostMapping
+    @GetMapping(value = "/find-by-email/{email}")
+    public List<Dog> findDogsByEmail(@PathVariable String email){
+        return dogService.findByEmail(email);
+    }
+
+    @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public Dog registerNewPDog (@RequestBody Dog dog){
         return dogService.addNewDog(dog);
+    }
+
+    @DeleteMapping(value = "/delete/{id}")
+    public void deleteDog(@PathVariable String id){
+        dogService.deleteDog(id);
     }
 }

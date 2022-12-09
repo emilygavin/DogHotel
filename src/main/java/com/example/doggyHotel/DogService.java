@@ -16,4 +16,13 @@ public class DogService {
     public Dog addNewDog(Dog dog){
         return dogRepository.insert(dog);
     }
+
+    public void deleteDog(String id){
+        dogRepository.deleteById(id);
+    }
+
+    public List<Dog> findByEmail(String email) {
+        List<Dog> dogs = dogRepository.findByEmailAddress(email);
+        return dogs;
+    }
 }
