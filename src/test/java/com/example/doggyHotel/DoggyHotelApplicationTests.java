@@ -43,7 +43,7 @@ class DoggyHotelApplicationTests {
 	}
 
 	@Test
-	public void testCreateNewDog(){
+	public void testCreateNewDog() throws Exception {
 		Dog dog = new Dog();
 		dog.setId("87654321");
 		dog.setOwnerName("Cliodhna");
@@ -54,7 +54,7 @@ class DoggyHotelApplicationTests {
 		dog.setBreed("Labrador");
 		dog.setAge(10);
 
-		assertThat(dogController.registerNewPDog(dog)).isEqualTo(dog);
+		assertThat(dogController.registerNewDog(dog)).isEqualTo(dog);
 	}
 }
 
