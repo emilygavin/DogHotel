@@ -3,6 +3,7 @@ package com.example.doggyHotel;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+//New branch for tests
 @SpringBootTest
 class DoggyHotelApplicationTests {
 
