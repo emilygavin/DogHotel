@@ -19,18 +19,18 @@ public class DogController {
     }
 
     @GetMapping(value = "/find-by-email/{email}")
-    public List<Dog> findDogsByEmail(@PathVariable String email){
+    public List<Dog> findDogsByEmail(@PathVariable String email) throws Exception {
         return dogService.findByEmail(email);
     }
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public Dog registerNewPDog (@RequestBody Dog dog){
+    public Dog registerNewDog (@RequestBody Dog dog) throws Exception {
         return dogService.addNewDog(dog);
     }
 
     @DeleteMapping(value = "/delete/{id}")
-    public void deleteDog(@PathVariable String id){
+    public void deleteDog(@PathVariable String id) throws Exception {
         dogService.deleteDog(id);
     }
 }
