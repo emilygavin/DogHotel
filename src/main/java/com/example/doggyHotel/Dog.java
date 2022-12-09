@@ -17,6 +17,10 @@ public class Dog {
     private String breed;
     private Integer age;
 
+    public Dog(){
+
+    }
+
     public Dog(String id, String ownerName, String phoneNumber, String emailAddress, String dogName, Gender dogGender, String breed, Integer age) {
         this.id = id;
         this.ownerName = ownerName;
