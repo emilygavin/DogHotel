@@ -7,15 +7,10 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class DoggyHotelApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(DoggyHotelApplication.class, args);
 	}
 
 	@Bean
-	CommandLineRunner runner (DogRepository repository) {
-		return args -> {
-		};
-	}
-
+	CommandLineRunner runner () { return args -> {}; }
 }
