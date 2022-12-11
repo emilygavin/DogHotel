@@ -20,6 +20,7 @@ class DoggyHotelApplicationTests {
 
 	@Autowired
 	DogController dogController;
+	DogService dogService;
 
 	@Test
 	public void testFindAllDogs(){
@@ -32,21 +33,6 @@ class DoggyHotelApplicationTests {
 	public void testFindFirstDog(){
 		Dog dog = new Dog();
 
-		dog.setId("12345678");
-		dog.setOwnerName("Emily");
-		dog.setPhoneNumber("0838674899");
-		dog.setEmailAddress("emilygavin@hotmail.com");
-		dog.setDogName("Percy");
-		dog.setDogGender(Gender.MALE);
-		dog.setBreed("Red Setter");
-		dog.setAge(7);
-
-		assertThat(dogController.fetchAllDogs().get(0)).isEqualTo(dog);
-	}
-
-	@Test
-	public void testCreateNewDog() throws Exception {
-		Dog dog = new Dog();
 		dog.setId("87654321");
 		dog.setOwnerName("Cliodhna");
 		dog.setPhoneNumber("0873883598");
@@ -55,6 +41,21 @@ class DoggyHotelApplicationTests {
 		dog.setDogGender(Gender.FEMALE);
 		dog.setBreed("Labrador");
 		dog.setAge(10);
+
+		assertThat(dogController.fetchAllDogs().get(0)).isEqualTo(dog);
+	}
+
+	@Test
+	public void testCreateNewDog() throws Exception {
+		Dog dog = new Dog();
+		dog.setId("98726543");
+		dog.setOwnerName("Elsie");
+		dog.setPhoneNumber("0863372615");
+		dog.setEmailAddress("elisesantella@hotmail.com");
+		dog.setDogName("Donnolly");
+		dog.setDogGender(Gender.MALE);
+		dog.setBreed("Labra-doodle");
+		dog.setAge(2);
 
 		assertThat(dogController.registerNewDog(dog)).isEqualTo(dog);
 	}
@@ -109,6 +110,45 @@ class DoggyHotelApplicationTests {
 			dogController.registerNewDog(dog);
 		});
 		String expectedMessage = "Invalid Owner Name!";
+		String actualMessage = exception.getMessage();
+		assertEquals(expectedMessage, actualMessage);
+	}
+
+	@Test
+	public void testCreateNewDogDeleteException() {
+		Dog dog = new Dog();
+		dog.setId("87676545");
+		dog.setOwnerName("Lilly");
+		dog.setPhoneNumber("0897762735");
+		dog.setEmailAddress("lillyobrien@gmail.com");
+		dog.setDogName("Billy");
+		dog.setDogGender(Gender.MALE);
+		dog.setBreed("Husky");
+		dog.setAge(5);
+
+		Exception exception = assertThrows(Exception.class, () -> {
+			dogController.deleteDog("87676545");
+		});
+		String expectedMessage = "Dog with this ID does not exist!";
+		String actualMessage = exception.getMessage();
+		assertEquals(expectedMessage, actualMessage);
+	}
+
+	@Test
+	public void testFindByEmailException() {
+		Dog dog = new Dog();
+		dog.setOwnerName("Patrick");
+		dog.setPhoneNumber("0873883598");
+		dog.setEmailAddress("patrickstar1@hotmail.com");
+		dog.setDogName("B");
+		dog.setDogGender(Gender.MALE);
+		dog.setBreed("Chihuahua");
+		dog.setAge(2);
+
+		Exception exception = assertThrows(Exception.class, () -> {
+			dogController.findDogsByEmail("patrickstar@hotmail.com");
+		});
+		String expectedMessage = "No dogs with this email are in the database.";
 		String actualMessage = exception.getMessage();
 		assertEquals(expectedMessage, actualMessage);
 	}
